@@ -1,7 +1,7 @@
-const sortingAlgorithms = require('../');
+const sortingAlgorithms = Object.values(require('../'));
 
 sortingAlgorithms.forEach((algorithm) => {
-  describe(`🛠 Running ${algorithm.name}...`, () => {
+  describe(`🛠  Running ${algorithm.name}...`, () => {
     it('works with a null input', () => {
       expect(algorithm(null)).toEqual(null);
     });
@@ -19,10 +19,9 @@ sortingAlgorithms.forEach((algorithm) => {
     });
 
     it('works with 100 random arrays', () => {
+      let randomArray;
       for (let i = 0; i < 100; i++) {
-        const randomArray = new Array(Math.floor(Math.random() * 100))
-          .fill(0)
-          .map((e) => Math.floor(Math.random() * 1000));
+        randomArray = new Array(Math.floor(Math.random() * 200)).fill(0).map((e) => Math.floor(Math.random() * 1000));
         expect(algorithm(randomArray)).toEqual(randomArray.sort((a, b) => a - b));
       }
     });

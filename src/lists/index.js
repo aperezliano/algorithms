@@ -1,1 +1,1 @@
-module.exports = [require('./mergesort')];
+module.exports = require('require-directory')(module, { recurse: false });
