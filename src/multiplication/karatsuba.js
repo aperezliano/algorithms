@@ -1,21 +1,20 @@
 module.exports = karatsuba;
 
-// Issue with numbers bigger than MAX_SAFE_INTEGER
 function karatsuba(x, y) {
   if (x === null || y === null) return null;
-  if (x < 10 && y < 10) return x * y;
+  if (x < 10n && y < 10n) return x * y;
 
   let maxLength = Math.max(x.toString().length, y.toString().length);
-  let m = Math.round(maxLength / 2);
+  let m = BigInt(Math.floor(maxLength / 2));
 
-  let xHigh = Math.floor(x / Math.pow(10, m));
-  let yHigh = Math.floor(y / Math.pow(10, m));
-  let xLow = x % Math.pow(10, m);
-  let yLow = y % Math.pow(10, m);
+  let xHigh = x / 10n ** m;
+  let yHigh = y / 10n ** m;
+  let xLow = x % 10n ** m;
+  let yLow = y % 10n ** m;
 
   let a = karatsuba(xHigh, yHigh);
   let d = karatsuba(xLow, yLow);
   let e = karatsuba(xLow + xHigh, yLow + yHigh) - a - d;
 
-  return a * Math.pow(10, m * 2) + e * Math.pow(10, m) + d;
+  return a * 10n ** (m * 2n) + e * 10n ** m + d;
 }
