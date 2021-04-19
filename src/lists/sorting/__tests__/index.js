@@ -1,4 +1,4 @@
-const sortingAlgorithms = Object.values(require('../'));
+const sortingAlgorithms = Object.values(require('..'));
 
 sortingAlgorithms.forEach((algorithm) => {
   describe(`🛠  Running ${algorithm.name}...`, () => {
