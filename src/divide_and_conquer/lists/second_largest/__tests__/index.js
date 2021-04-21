@@ -5,11 +5,11 @@ function getSecondLargestFromArray(array) {
   return sortedArray[1] || null;
 }
 
-it('works with null input', () => {
+it('returns null with null input', () => {
   expect(secondLargest(null)).toBeNull();
 });
 
-it('works with an empty array', () => {
+it('returns null with an empty array', () => {
   expect(secondLargest([])).toBeNull();
 });
 
