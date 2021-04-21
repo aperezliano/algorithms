@@ -1,3 +1,4 @@
+const fs = require('fs');
 const sortingAlgorithms = Object.values(require('..'));
 
 sortingAlgorithms.forEach((algorithm) => {
@@ -24,6 +25,20 @@ sortingAlgorithms.forEach((algorithm) => {
         .map(() => [new Array(Math.floor(Math.random() * 200)).fill(0).map(() => Math.floor(Math.random() * 1000))])
     )('works with 100 random arrays: %p', (randomArray) => {
       expect(algorithm(randomArray)).toEqual(randomArray.sort((a, b) => a - b));
+    });
+
+    it('works with a very large array', () => {
+      const INPUT_ARRAY_PATH = 'src/divide_and_conquer/lists/sorting/__tests__/inputs/large_array.txt';
+      try {
+        const list = fs
+          .readFileSync(INPUT_ARRAY_PATH, 'utf8')
+          .split('\n')
+          .map((e) => parseInt(e));
+
+        expect(algorithm(list)).toEqual(list.sort((a, b) => a - b));
+      } catch (err) {
+        console.error(err);
+      }
     });
   });
 });
