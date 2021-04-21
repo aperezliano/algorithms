@@ -13,12 +13,16 @@ it('works with the array [4,3,2,1]', () => {
   expect(inversions([4, 3, 2, 1])).toEqual([[1, 2, 3, 4], 4]);
 });
 
+it('works with the array [1,3,5,2,4,6]', () => {
+  expect(inversions([1, 3, 5, 2, 4, 6])).toEqual([[1, 2, 3, 4, 5, 6], 3]);
+});
+
 it('works with the array [1,3,2,6,5,8,7,9,4]', () => {
   expect(inversions([1, 3, 2, 6, 5, 8, 7, 9, 4])).toEqual([[1, 2, 3, 4, 5, 6, 7, 8, 9], 7]);
 });
 
 it('works with a very large array', () => {
-  const INPUT_ARRAY_PATH = 'src/lists/inversions/__tests__/inputs/large_array.txt';
+  const INPUT_ARRAY_PATH = 'src/divide_and_conquer/lists/inversions/__tests__/inputs/large_array.txt';
   try {
     const list = fs
       .readFileSync(INPUT_ARRAY_PATH, 'utf8')

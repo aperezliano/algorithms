@@ -19,9 +19,10 @@ sortingAlgorithms.forEach((algorithm) => {
     });
 
     it('works with 100 random arrays', () => {
-      let randomArray;
       for (let i = 0; i < 100; i++) {
-        randomArray = new Array(Math.floor(Math.random() * 200)).fill(0).map((e) => Math.floor(Math.random() * 1000));
+        const randomArray = new Array(Math.floor(Math.random() * 200))
+          .fill(0)
+          .map(() => Math.floor(Math.random() * 1000));
         expect(algorithm(randomArray)).toEqual(randomArray.sort((a, b) => a - b));
       }
     });
