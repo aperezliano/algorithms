@@ -18,13 +18,12 @@ sortingAlgorithms.forEach((algorithm) => {
       expect(algorithm([1, 3, 2, 6, 5, 8, 7, 9, 4])).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
-    it('works with 100 random arrays', () => {
-      for (let i = 0; i < 100; i++) {
-        const randomArray = new Array(Math.floor(Math.random() * 200))
-          .fill(0)
-          .map(() => Math.floor(Math.random() * 1000));
-        expect(algorithm(randomArray)).toEqual(randomArray.sort((a, b) => a - b));
-      }
+    it.each(
+      new Array(100)
+        .fill(0)
+        .map(() => [new Array(Math.floor(Math.random() * 200)).fill(0).map(() => Math.floor(Math.random() * 1000))])
+    )('works with 100 random arrays: %p', (randomArray) => {
+      expect(algorithm(randomArray)).toEqual(randomArray.sort((a, b) => a - b));
     });
   });
 });

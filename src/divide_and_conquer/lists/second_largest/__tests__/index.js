@@ -17,11 +17,11 @@ it('returns null for an array with a single element', () => {
   expect(secondLargest([1])).toBeNull();
 });
 
-it.each([[[1, 1, 1]], [[null, null, null]]])('returns null for arrays with the same elements: %s', (array) => {
+it.each([[[1, 1, 1]], [[null, null, null]]])('returns null for arrays with the same elements: %p', (array) => {
   expect(secondLargest(array)).toBeNull();
 });
 
-it.each([[[1, 2]], [[3, 4]]])('returns the smallest element for an array of 2 elements: %s', (array) => {
+it.each([[[1, 2]], [[3, 4]]])('returns the smallest element for an array of 2 elements: %p', (array) => {
   expect(secondLargest(array)).toEqual(getSecondLargestFromArray(array));
 });
 
