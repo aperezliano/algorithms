@@ -29,11 +29,12 @@ it('returns the second largest from [3,4,7,9,10,11,12,11]', () => {
   expect(secondLargest([3, 4, 7, 9, 10, 11, 12, 11])).toEqual(11);
 });
 
-it('returns the second largest from 100 random arrays of unique elements', () => {
-  for (let i = 0; i < 100; i++) {
-    const randomArray = [
-      ...new Set(new Array(Math.floor(Math.random() * 200)).fill(0).map(() => Math.floor(Math.random() * 1000))),
-    ];
-    expect(secondLargest(randomArray)).toEqual(getSecondLargestFromArray(randomArray));
-  }
+it.each(
+  new Array(100)
+    .fill(0)
+    .map(() => [
+      [...new Set(new Array(Math.floor(Math.random() * 200)).fill(0).map(() => Math.floor(Math.random() * 1000)))],
+    ])
+)('returns the second largest from 100 random arrays of unique elements: %p', (randomArray) => {
+  expect(secondLargest(randomArray)).toEqual(getSecondLargestFromArray(randomArray));
 });
