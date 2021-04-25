@@ -12,7 +12,10 @@ function ithOrderStatistic(array, i) {
 
 function partition(array) {
   const copyArray = [...array];
-  const pivot = copyArray[0];
+  // random pivot selection
+  const pivotPosition = Math.floor(Math.random() * array.length);
+  const pivot = copyArray[pivotPosition];
+  [copyArray[0], copyArray[pivotPosition]] = [copyArray[pivotPosition], copyArray[0]];
   let i = 1;
   for (let j = 1; j < copyArray.length; j++) {
     if (copyArray[j] < pivot) {
