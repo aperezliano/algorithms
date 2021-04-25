@@ -1,4 +1,5 @@
 const fs = require('fs');
+
 const sortingAlgorithms = Object.values(require('..'));
 
 sortingAlgorithms.forEach((algorithm) => {

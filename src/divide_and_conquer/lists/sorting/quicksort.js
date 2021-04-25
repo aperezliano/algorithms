@@ -4,16 +4,21 @@ function quicksort(array) {
   if (array === null) return null;
   if (array.length <= 1) return array;
 
-  const pivot = array[0];
-  let i = 1;
+  let [partitionArray, i, pivot] = partition(array);
 
-  for (let j = 1; j < array.length; j++) {
-    if (array[j] < pivot) {
-      [array[i], array[j]] = [array[j], array[i]];
+  return [...quicksort(partitionArray.slice(0, i - 1)), pivot, ...quicksort(partitionArray.slice(i))];
+}
+
+function partition(array) {
+  const copyArray = [...array];
+  const pivot = copyArray[0];
+  let i = 1;
+  for (let j = 1; j < copyArray.length; j++) {
+    if (copyArray[j] < pivot) {
+      [copyArray[i], copyArray[j]] = [copyArray[j], copyArray[i]];
       i++;
     }
   }
-  [array[0], array[i - 1]] = [array[i - 1], array[0]];
-
-  return [...quicksort(array.slice(0, i - 1)), pivot, ...quicksort(array.slice(i))];
+  [copyArray[0], copyArray[i - 1]] = [copyArray[i - 1], copyArray[0]];
+  return [copyArray, i, pivot];
 }
