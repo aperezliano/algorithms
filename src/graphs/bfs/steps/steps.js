@@ -2,7 +2,9 @@ module.exports = steps;
 
 function steps(graph, initialNode) {
   if (graph === null || initialNode === null) return null;
-  const visitedNodes = new Map(graph.getNodes().map((e) => [e, false]));
+  const visitedNodes = new Map();
+  for (let node of graph.getNodes()) visitedNodes.set(node, false);
+
   const queue = [initialNode];
   if (!visitedNodes.has(initialNode)) return null;
   let steps = 0;

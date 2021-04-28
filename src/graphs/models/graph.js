@@ -24,11 +24,32 @@ module.exports = class Graph {
   }
 
   getNodes() {
-    return [...this.#nodes.keys()];
+    return this.#nodes.keys();
   }
 
   getConnectedNodes(node) {
     return this.#nodes.get(node);
+  }
+
+  reverse() {
+    const reverseGraph = new Map();
+    for (let [node, edges] of this.#nodes) {
+      if (!reverseGraph.has(node)) reverseGraph.set(node, []);
+      for (let edge of edges) {
+        if (!reverseGraph.has(edge)) reverseGraph.set(edge, []);
+        reverseGraph.get(edge).push(node);
+      }
+    }
+    this.#nodes = reverseGraph;
+  }
+
+  renameNodes(renameMap) {
+    const renamedGraph = new Map();
+    for (let [node, edges] of this.#nodes) {
+      const renamedEdges = edges.map((e) => renameMap.get(e));
+      if (!renamedGraph.has(renameMap.get(node))) renamedGraph.set(renameMap.get(node), renamedEdges);
+    }
+    this.#nodes = renamedGraph;
   }
 
   addEdge(src, dest) {
@@ -37,29 +58,6 @@ module.exports = class Graph {
 
     this.#nodes.get(src).push(dest);
     if (!this.#directed) this.#nodes.get(dest).push(src);
-  }
-
-  reverse() {
-    if (!this.#directed) return;
-    const reverseMap = new Map();
-    for (let [node, edges] of this.#nodes) {
-      if (!reverseMap.has(node)) reverseMap.set(node, []);
-      for (let edge of edges) {
-        if (!reverseMap.has(edge)) reverseMap.set(edge, []);
-        reverseMap.get(edge).push(node);
-      }
-    }
-    this.#nodes = reverseMap;
-  }
-
-  renameNodes(nodesMap) {
-    const renamedNodes = new Map();
-    for (let node of this.getNodes()) {
-      const newEdges = this.getConnectedNodes(node).map((e) => nodesMap.get(e));
-      this.#nodes.delete(node);
-      renamedNodes.set(nodesMap.get(node), newEdges);
-    }
-    this.#nodes = renamedNodes;
   }
 
   #addNode(node) {

@@ -14,9 +14,11 @@ function stronglyConnected(graph) {
 }
 
 function getTopologicalOrder(graph) {
-  const visitedNodes = new Map(graph.getNodes().map((node) => [node, false]));
+  const visitedNodes = new Map();
+  for (let node of graph.getNodes()) visitedNodes.set(node, false);
 
-  const labels = new Map(graph.getNodes().map((node) => [node, 0]));
+  const labels = new Map();
+  for (let node of graph.getNodes()) labels.set(node, 0);
   let currentLabel = 0;
 
   for (let node = visitedNodes.size; node > 0; node--) {
@@ -35,7 +37,9 @@ function getTopologicalOrder(graph) {
 }
 
 function getMaximumSCCs(graph) {
-  const visitedNodes = new Map(graph.getNodes().map((node) => [node, false]));
+  const visitedNodes = new Map();
+  for (let node of graph.getNodes()) visitedNodes.set(node, false);
+
   const maxSCCs = [];
   let maxNodes;
 

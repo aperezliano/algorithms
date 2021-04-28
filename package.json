@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "run:sccs": "node --stack_size=300000 src/graphs/dfs/strongly_connected/scss_test.js",
     "prepare": "husky install"
   },
   "repository": {

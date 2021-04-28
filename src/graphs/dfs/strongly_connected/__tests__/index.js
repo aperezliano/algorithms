@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const stronglyConnected = require('../strongly_connected');
 const Graph = require('../../../models/graph');
 
@@ -107,3 +109,5 @@ it('Test case 5 -> Sol: 6,3,2,1', () => {
   graph.addEdge(12, 10);
   expect(stronglyConnected(graph)).toEqual([6, 2, 3, 1]);
 });
+
+// Huge test case -> To run it: yarn run:sccs
