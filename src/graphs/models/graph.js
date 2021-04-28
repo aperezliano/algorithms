@@ -46,8 +46,10 @@ module.exports = class Graph {
   renameNodes(renameMap) {
     const renamedGraph = new Map();
     for (let [node, edges] of this.#nodes) {
-      const renamedEdges = edges.map((e) => renameMap.get(e));
-      if (!renamedGraph.has(renameMap.get(node))) renamedGraph.set(renameMap.get(node), renamedEdges);
+      renamedGraph.set(
+        renameMap.get(node),
+        edges.map((e) => renameMap.get(e))
+      );
     }
     this.#nodes = renamedGraph;
   }
