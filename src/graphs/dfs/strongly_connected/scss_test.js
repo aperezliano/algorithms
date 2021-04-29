@@ -24,16 +24,20 @@ rl.on('line', (row) => {
 });
 
 rl.on('close', () => {
-  calculateSCCs();
+  console.log('Top 5 SCCs:');
+  console.log(calculateTopFiveSCCs());
+  console.log('***********');
+  console.log('Memory usage:');
+  printMemoryUsage();
 });
 
-function calculateSCCs() {
-  console.log(
-    stronglyConnected(graph)
-      .sort((a, b) => b - a)
-      .slice(0, 5)
-  );
+function calculateTopFiveSCCs() {
+  return stronglyConnected(graph)
+    .sort((a, b) => b - a)
+    .slice(0, 5);
+}
 
+function printMemoryUsage() {
   const used = process.memoryUsage();
   for (let key in process.memoryUsage()) {
     console.log(`${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`);
