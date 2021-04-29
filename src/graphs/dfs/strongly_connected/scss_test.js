@@ -1,18 +1,18 @@
 const fs = require('fs');
+const readline = require('readline');
 
 const stronglyConnected = require('./strongly_connected');
 const Graph = require('../../models/graph');
 
 const INPUT_GRAPH_PATH = 'src/graphs/dfs/strongly_connected/__tests__/inputs/SCC.txt';
-let graphList;
-try {
-  graphList = fs.readFileSync(INPUT_GRAPH_PATH, 'utf8').split('\n');
-} catch (err) {
-  console.error(err);
-}
-
 const graph = new Graph(true);
-graphList.forEach((row) => {
+
+const rl = readline.createInterface({
+  input: fs.createReadStream(INPUT_GRAPH_PATH, { encoding: 'utf8' }),
+  terminal: false,
+});
+
+rl.on('line', (row) => {
   const edges = row
     .split(' ')
     .map((e) => parseInt(e))
@@ -23,13 +23,19 @@ graphList.forEach((row) => {
   });
 });
 
-console.log(
-  stronglyConnected(graph)
-    .sort((a, b) => b - a)
-    .slice(0, 5)
-);
+rl.on('close', () => {
+  calculateSCCs();
+});
 
-const used = process.memoryUsage();
-for (let key in process.memoryUsage()) {
-  console.log(`${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`);
+function calculateSCCs() {
+  console.log(
+    stronglyConnected(graph)
+      .sort((a, b) => b - a)
+      .slice(0, 5)
+  );
+
+  const used = process.memoryUsage();
+  for (let key in process.memoryUsage()) {
+    console.log(`${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`);
+  }
 }
