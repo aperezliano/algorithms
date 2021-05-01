@@ -25,6 +25,7 @@
     "jest": "^26.6.3"
   },
   "dependencies": {
+    "heap": "^0.2.6",
     "require-directory": "^2.1.1"
   }
 }
