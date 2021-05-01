@@ -45,7 +45,19 @@ it('works for large input Graph', () => {
   });
 
   rl.on('close', () => {
-    const distances = [...dijkstra(graph, 1).values()].slice(0, 10);
-    expect(distances).toEqual([0, 508, 546, 647, 648, 676, 743, 745, 815, 826]);
+    const distances = dijkstra(graph, 1);
+    const result = [
+      distances.get(7),
+      distances.get(37),
+      distances.get(59),
+      distances.get(82),
+      distances.get(99),
+      distances.get(115),
+      distances.get(133),
+      distances.get(165),
+      distances.get(188),
+      distances.get(197),
+    ];
+    expect(result).toEqual([2599, 2610, 2947, 2052, 2367, 2399, 2029, 2442, 2505, 3068]);
   });
 });
