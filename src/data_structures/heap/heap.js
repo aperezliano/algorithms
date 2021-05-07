@@ -13,9 +13,14 @@ module.exports = class Heap {
   }
 
   extract() {
-    const returnElement = this.#data[0];
+    const returnElement = this.#data[0] ?? null;
     this.#data[0] = this.#data.pop();
     this.#bubbleDown();
+    return this.#min ? returnElement : -1 * returnElement;
+  }
+
+  peek() {
+    const returnElement = this.#data[0] ?? null;
     return this.#min ? returnElement : -1 * returnElement;
   }
 
