@@ -77,11 +77,15 @@ it('32', () => {
   testFromFile('src/greedy/clustering/__tests__/inputs/32.txt', 32, 4, 90);
 });
 
+it('256', () => {
+  testFromFile('src/greedy/clustering/__tests__/inputs/256.txt', 256, 4, 1075);
+});
+
 it('500', () => {
   testFromFile('src/greedy/clustering/__tests__/inputs/clusters.txt', 500, 4, 106);
 });
 
-it.skip('512', () => {
+it('512', () => {
   testFromFile('src/greedy/clustering/__tests__/inputs/512.txt', 512, 4, 2566);
 });
 

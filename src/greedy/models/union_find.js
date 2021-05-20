@@ -17,11 +17,11 @@ module.exports = class UnionFind {
 
     if (rootX === rootY) return;
     if (this.#ranks[rootX] > this.#ranks[rootY]) {
+      this.#ranks[rootX] += this.#roots.filter((root) => root === rootY).length;
       this.#roots = this.#roots.map((root) => (root === rootY ? rootX : root));
-      this.#ranks[rootX]++;
     } else {
+      this.#ranks[rootY] += this.#roots.filter((root) => root === rootX).length;
       this.#roots = this.#roots.map((root) => (root === rootX ? rootY : root));
-      this.#ranks[rootY]++;
     }
   }
 
