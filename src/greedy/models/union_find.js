@@ -16,16 +16,24 @@ module.exports = class UnionFind {
     const rootY = this.#roots[y];
 
     if (rootX === rootY) return;
-    if (this.#ranks[rootX] > this.#ranks[rootY]) {
-      this.#ranks[rootX] += this.#roots.filter((root) => root === rootY).length;
-      this.#roots = this.#roots.map((root) => (root === rootY ? rootX : root));
-    } else {
-      this.#ranks[rootY] += this.#roots.filter((root) => root === rootX).length;
-      this.#roots = this.#roots.map((root) => (root === rootX ? rootY : root));
-    }
+
+    const rootXRank = this.#ranks[rootX];
+    const rootYRank = this.#ranks[rootY];
+    const [winner, looser] = rootXRank >= rootYRank ? [rootX, rootY] : [rootY, rootX];
+
+    this.#increaseRanks(winner, looser);
+    this.#updateRoots(winner, looser);
   }
 
   groups() {
     return new Set(this.#roots).size;
+  }
+
+  #increaseRanks(winner) {
+    this.#ranks[winner]++;
+  }
+
+  #updateRoots(winner, looser) {
+    this.#roots = this.#roots.map((root) => (root === looser ? winner : root));
   }
 };
