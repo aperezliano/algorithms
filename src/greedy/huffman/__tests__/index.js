@@ -50,11 +50,16 @@ it('works a big input alphabet', () => {
   rl.on('close', () => {
     const result = huffman(alphabet);
     let longestString = '';
+    let shortestString = new Array(9000).fill(0).join();
     for (let code of result.values()) {
       if (longestString.length < code.length) {
         longestString = code;
       }
+      if (shortestString.length > code.length) {
+        shortestString = code;
+      }
     }
     expect(longestString.length).toBe(19);
+    expect(shortestString.length).toBe(9);
   });
 });
