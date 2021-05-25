@@ -4,22 +4,28 @@ module.exports = huffman;
 
 function huffman(characters) {
   if (characters === null) return null;
+  const sortedAlphabet = alphabet.sort((a, b) => a.weight - b.weight);
+  const sortedAlphabetWithTreeNodes = sortedAlphabet.map((c) => {
+    return { ...c, tree: new Tree(c.character) };
+  });
+  const firstQueue = sortedAlphabetWithTreeNodes;
+  const secondQueue = [];
 
-  const huffmanTree = huffmanRec(
-    characters.map((c) => {
-      return { ...c, tree: new Tree(c.character) };
-    })
-  );
+  while (firstQueue.length + secondQueue.length > 1) {
+    const firstE = getMinElementFromQueues(firstQueue, secondQueue);
+    const secondE = getMinElementFromQueues(firstQueue, secondQueue);
 
+    secondQueue.push(getMergedCharacter(firstE, secondE));
+  }
+
+  const huffmanTree = firstQueue.length > 0 ? firstQueue[0].tree : secondQueue[0].tree;
   return huffmanTree.getNodesMap();
 }
 
-function huffmanRec(alphabet) {
-  if (alphabet.length === 1) return alphabet[0].tree;
-  const sortedalphabet = alphabet.sort((a, b) => a.weight - b.weight);
-  const [character1, character2] = sortedalphabet.splice(0, 2);
-
-  return huffmanRec(alphabet.concat([getMergedCharacter(character1, character2)]));
+function getMinElementFromQueues(firstQueue, secondQueue) {
+  if (firstQueue.length === 0) return secondQueue.shift();
+  if (secondQueue.length === 0) return firstQueue.shift();
+  return firstQueue[0].weight < secondQueue[0].weight ? firstQueue.shift() : secondQueue.shift();
 }
 
 function getMergedCharacter(character1, character2) {
