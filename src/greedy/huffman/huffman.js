@@ -2,8 +2,8 @@ const Tree = require('../models/tree');
 
 module.exports = huffman;
 
-function huffman(characters) {
-  if (characters === null) return null;
+function huffman(alphabet) {
+  if (alphabet === null) return null;
   const sortedAlphabet = alphabet.sort((a, b) => a.weight - b.weight);
   const sortedAlphabetWithTreeNodes = sortedAlphabet.map((c) => {
     return { ...c, tree: new Tree(c.character) };
