@@ -1,22 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
-const knapsack = require('../knapsack');
+const knapsack = require('./knapsack');
 
-it('works for a small set', () => {
-  const W = 6;
-  const items = [
-    { value: 3, weight: 4 },
-    { value: 2, weight: 3 },
-    { value: 4, weight: 2 },
-    { value: 4, weight: 3 },
-  ];
-
-  expect(knapsack(items, W)).toEqual(8);
-});
-
-it('works for regular input file', () => {
-  testFromFile('src/dynamic/knapsack/__tests__/inputs/knapsack.txt', 10000, 2493893);
-});
+testFromFile('src/dynamic/knapsack/__tests__/inputs/knapsack_big.txt', 2000000, 4243395);
 
 function testFromFile(filePath, capacity, result) {
   const PATH = filePath;
@@ -34,6 +20,6 @@ function testFromFile(filePath, capacity, result) {
 
   rl.on('close', () => {
     const knapsackResult = knapsack(items, capacity);
-    expect(knapsackResult).toBe(result);
+    console.log(`knapsack result is correct? ${knapsackResult === 4243395 ? '✅' : '❌'}`);
   });
 }
