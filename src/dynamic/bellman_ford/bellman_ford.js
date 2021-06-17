@@ -5,8 +5,9 @@ function bellmanFord(graph, sourceVertex) {
   for (let node of graph.getNodes()) {
     A[0][node] = node === sourceVertex ? 0 : Number.POSITIVE_INFINITY;
   }
-  for (let i = 1; i < graph.size() - 1; i++) {
+  for (let i = 1; i < graph.size(); i++) {
     A[i] = {};
+    let anyUpdate = false;
     for (let node of graph.getNodes()) {
       const inEdges = graph.getInEdges(node);
       let minPrevPath = Number.POSITIVE_INFINITY;
@@ -15,9 +16,12 @@ function bellmanFord(graph, sourceVertex) {
           .filter((e) => isFinite(A[i - 1][e.node]))
           .reduce((acc, v) => (v.weight < acc.weight ? v : acc), { weight: Number.POSITIVE_INFINITY });
         minPrevPath = prevNode.node ? A[i - 1][prevNode.node] + prevNode.weight : minPrevPath;
+        anyUpdate = anyUpdate || isFinite(minPrevPath);
       }
       A[i][node] = Math.min(A[i - 1][node], minPrevPath);
     }
+    if (!anyUpdate) break;
   }
-  return A;
+
+  return Object.values(A[graph.size() - 1]).join(',') === Object.values(A[graph.size() - 2]).join(',') ? A : null;
 }

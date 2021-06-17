@@ -1,8 +1,12 @@
 module.exports = class WeightGraph {
   #nodes;
+  #adjancencyMap;
+  #inEdges;
 
   constructor() {
     this.#nodes = new Map();
+    this.#inEdges = new Map();
+    this.#adjancencyMap = null;
   }
 
   isEmpty() {
@@ -14,11 +18,12 @@ module.exports = class WeightGraph {
   }
 
   getAdjancencyMap() {
-    const adjancencyMap = new Map();
+    if (this.#adjancencyMap) return this.#adjancencyMap;
+    this.#adjancencyMap = new Map();
     [...this.#nodes.entries()].forEach(([node, edges]) => {
-      adjancencyMap.set(node, [...edges]);
+      this.#adjancencyMap.set(node, [...edges]);
     });
-    return adjancencyMap;
+    return this.#adjancencyMap;
   }
 
   getNodes() {
@@ -30,12 +35,14 @@ module.exports = class WeightGraph {
   }
 
   getInEdges(inNode) {
+    if (this.#inEdges.has(inNode)) return this.#inEdges.get(inNode);
     const inEdges = [];
     for (let [node, vertexes] of this.getAdjancencyMap().entries()) {
       vertexes.forEach((vertex) => {
         if (vertex.node === inNode) inEdges.push({ node, weight: vertex.weight });
       });
     }
+    this.#inEdges.set(inNode, inEdges);
     return inEdges;
   }
 
