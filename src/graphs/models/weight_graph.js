@@ -29,6 +29,16 @@ module.exports = class WeightGraph {
     return this.#nodes.get(node);
   }
 
+  getInEdges(inNode) {
+    const inEdges = [];
+    for (let [node, vertexes] of this.getAdjancencyMap().entries()) {
+      vertexes.forEach((vertex) => {
+        if (vertex.node === inNode) inEdges.push({ node, weight: vertex.weight });
+      });
+    }
+    return inEdges;
+  }
+
   addEdge(src, dest) {
     if (!this.#nodes.has(src)) this.#addNode(src);
     if (!this.#nodes.has(dest.node)) this.#addNode(dest.node);
