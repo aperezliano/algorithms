@@ -1,4 +1,4 @@
-const bellmanFord = require('../bellman-ford');
+const bellmanFord = require('../bellman_ford');
 const Graph = require('../../../graphs/models/weight_graph');
 
 it('works for a simple graph', () => {
