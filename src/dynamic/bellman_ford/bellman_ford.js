@@ -5,7 +5,7 @@ function bellmanFord(graph, sourceVertex) {
   for (let node of graph.getNodes()) {
     A[0][node] = node === sourceVertex ? 0 : Number.POSITIVE_INFINITY;
   }
-  for (let i = 1; i < graph.size() - 1; i++) {
+  for (let i = 1; i < graph.size(); i++) {
     let anyUpdate = false;
     [A, anyUpdate] = calculateMinPaths(graph, A);
     A[0] = A[1];
