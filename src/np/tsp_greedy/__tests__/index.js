@@ -28,5 +28,5 @@ it('works for a given set of cities', () => {
     { x: 27166.6667, y: 9833.3333 },
     { x: 27233.3333, y: 10450.0 },
   ].map(({ x, y }) => new City(x, y));
-  expect(tspGreedy(citiesCoords)).toBe(26575.813447277447);
+  expect(Math.round(tspGreedy(citiesCoords))).toBe(32982);
 });

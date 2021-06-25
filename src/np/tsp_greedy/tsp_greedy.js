@@ -18,6 +18,7 @@ function tspGreedy(cities) {
     travelLength += v;
     startingPoint = pendingCities.splice(i, 1)[0];
   }
+  travelLength += getDistance(startingPoint, cities[0]);
   return travelLength;
 }
 
