@@ -32,6 +32,10 @@ it('returns 6 with a simple graph', () => {
   expect(prim(graph, 0)).toEqual(6);
 });
 
+it.skip('1024', () => {
+  testFromFile('src/greedy/clustering/__tests__/inputs/1024.txt', 1024, 4, 6666);
+});
+
 it('works for a large input Graph', () => {
   const INPUT_GRAPH_PATH = 'src/greedy/prim/__tests__/inputs/graph.txt';
   const graph = new WeightGraph();
