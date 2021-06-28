@@ -2,10 +2,10 @@ module.exports = reduceInput;
 
 /**
  *
- * @param {[Number,Number][]} clauses
+ * @param {[Number,Number][]} assignments
  */
-function reduceInput(clauses) {
-  let reduction = [...clauses];
+function reduceInput(assignments) {
+  let reduction = [...assignments];
   let isReduced;
   do {
     isReduced = false;

@@ -8,6 +8,7 @@
     "run:sccs": "node --stack_size=300000 src/graphs/dfs/strongly_connected/scss_test.js",
     "run:knapsack": "node --max-old-space-size=6144 src/dynamic/knapsack/knapsack_big_test.js",
     "run:bellman": "node --max-old-space-size=6144 src/dynamic/bellman_ford/bellman_ford_big_tests.js",
+    "run:papadimitriou": "node src/np/2sat/index.js",
     "prepare": "husky install"
   },
   "repository": {
