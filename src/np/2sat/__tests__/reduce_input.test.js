@@ -20,7 +20,7 @@ it('works for a sample input', () => {
   ]);
 });
 
-it.each([
+it.skip.each([
   ['src/np/2sat/.inputs/2sat1.txt', 6],
   ['src/np/2sat/.inputs/2sat2.txt', 57],
   ['src/np/2sat/.inputs/2sat3.txt', 295],

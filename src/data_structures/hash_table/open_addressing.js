@@ -53,7 +53,7 @@ class HashTableOpenAddressing {
     let newKey = hashKey;
     do {
       newKey = (newKey + 1) % this.#size;
-      if (this.#buckets[newKey] != undefined && this.#buckets[newKey][key] != undefined) {
+      if (this.#buckets?.[newKey]?.[key] != undefined) {
         return this.#buckets[newKey][key];
       }
     } while (newKey !== hashKey);
